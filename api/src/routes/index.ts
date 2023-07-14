@@ -1,5 +1,11 @@
-//! Acá van todas las rutas
-//?Importar las rutas .
 
-//* ej :    router.use( "/user", userRouter )
-//* ej:     router.use( "/historyShop",  historyRouter)
+import { Router } from 'express';
+import { getProductById, getProducts } from '../controllers/Products';
+import userRouter from './user';
+
+const router = Router();
+
+router.use('/user', userRouter);
+// router.use('/product', productRouter);
+
+export default router;
