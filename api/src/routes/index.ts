@@ -1,3 +1,4 @@
+
 import { Router } from 'express';
 import { getProductById, getProducts } from '../controllers/Products';
 import userRouter from './user';
