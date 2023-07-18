@@ -1,8 +1,9 @@
+import { User } from "../../lib/database/models/User";
 //! service de users
 
+import { UserAttributes } from "../../lib/database/models/User";
 import { log } from "console";
 import { ProductHistory } from "../../lib/database/models/ProductHistory";
-import { User } from "../../lib/database/models/User";
 
 export const getAllUser = async () => {
     const users = await User.findAll({
@@ -29,3 +30,13 @@ export const getOneUser = async (id: number) => {
     log(user)
     return user
 }
+ 
+export const create = async (user: UserAttributes) => {
+    try {
+      const userCreate = await User.create(user)
+      return userCreate    
+    } catch (error) {
+      console.log(error);
+      
+    }
+};

@@ -1,23 +1,9 @@
-import { Request, Response } from 'express';
-import axios from 'axios';
+import { Router } from 'express';
+import { getProductById, getProducts } from './controllers/productsController';
 
-export const getProducts = async (req: Request, res: Response) => {
-  try {
-    const resp = await axios.get('https://apinext-98lb.vercel.app');
-    res.status(200).json(resp.data);
-  } catch (error) {
-    res.status(404).json({ error });
-  }
-};
+const productsRouter = Router();
 
-export const getProductById = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  try {
-    const resp = await axios.get(
-      `https://apinext-98lb.vercel.app/product/${id}`
-    );
-    res.status(200).json(resp.data);
-  } catch (error) {
-    res.status(404).json({ error });
-  }
-};
+productsRouter.get('/', getProducts);
+productsRouter.get('/:id', getProductById);
+
+export default productsRouter;
