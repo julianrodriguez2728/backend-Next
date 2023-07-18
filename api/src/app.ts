@@ -1,7 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import router from './routes/index';
-const cookieParser = require('cookie-parser')
-const morgan = require('morgan')
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 
 const app: Application = express();
 app.use(express.urlencoded({ extended: true, limit: '50mb' })); //middleware
@@ -32,6 +32,6 @@ app.use((err: error, req: Request, res: Response, next: NextFunction) => {
   res.status(status).send(message);
 });
 
-app.use('/', router);
+app.use('/api', router);
 
 export default app;
