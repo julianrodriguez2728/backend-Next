@@ -1,11 +1,16 @@
+import { User } from "../../lib/database/models/User";
+import { UserAttributes } from "../../lib/database/models/User";
 //! service de users
-interface user {
-  name: string;
-  email: string;
-  password: string;
-  picture: string;
-}
 
-export const getAllUser = async () => {};
-
-export const create = async (user: user) => {};
+export const getAllUser = async () => {
+  
+};
+export const create = async (user: UserAttributes) => {
+    try {
+      const userCreate = await User.create(user)
+      return userCreate    
+    } catch (error) {
+      console.log(error);
+      
+    }
+};

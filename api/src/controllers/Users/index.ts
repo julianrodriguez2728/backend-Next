@@ -1,13 +1,7 @@
 import { log } from 'console';
 import { getAllUser, create } from '../../services/user';
 import { Request, Response } from 'express';
-
-interface user {
-  name: string;
-  email: string;
-  password: string;
-  picture: string;
-}
+import { UserAttributes } from "../../lib/database/models/User";
 
 export const allUsers = async () => {
   try {
@@ -18,7 +12,7 @@ export const allUsers = async () => {
 };
 
 export const postUser = async (req: Request, res: Response) => {
-  const user: user = req.body;
+  const user: UserAttributes = req.body;
   try {
     const response = await create(user);
     res.status(200).send(response);

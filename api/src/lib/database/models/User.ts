@@ -2,7 +2,7 @@
 import { Column, Table, Model, HasMany } from 'sequelize-typescript';
 import { ProductHistory } from './ProductHistory';
 
-interface UserAttributes {
+export interface UserAttributes {
     id: number,
     name: string,
     email: string,
