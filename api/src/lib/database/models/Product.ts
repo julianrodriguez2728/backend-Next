@@ -1,9 +1,9 @@
-//! MODELO DE HISTORY SHOP
+//! MODELO DE Product 
 
 import { User } from "./User";
 import { Model, Column, Table, CreatedAt, UpdatedAt, BelongsTo, ForeignKey } from "sequelize-typescript";
 
-interface History {
+interface ProductModel {
     id: number,
     amount: number,
     name: string,
@@ -11,15 +11,13 @@ interface History {
     createdAt: Date,
     updatedAt: Date,
 }
-
-
 @Table({
     timestamps: true,
-    tableName:"Product History",
+    tableName:"Product",
     freezeTableName: true,
-    modelName:"Product History",
+    modelName:"Product",
 })
-export class ProductHistory extends Model<History> {
+export class Product extends Model<ProductModel> {
     @Column({
         primaryKey: true,
         autoIncrement: true,
