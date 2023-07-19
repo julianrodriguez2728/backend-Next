@@ -6,7 +6,7 @@ import { Request, Response } from 'express';
 const userRouter: Router = Router();
 
 userRouter.post('/', postUser);
-userRouter.get('/', allUsers);
+userRouter.get('/all', allUsers);
 userRouter.get('/:id', oneUser)
 
 export default userRouter;
