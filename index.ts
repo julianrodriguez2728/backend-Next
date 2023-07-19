@@ -1,9 +1,13 @@
-import express from "express";
-import { router } from "./api/src/routes";
-const app = express()
+import express, { Application } from 'express';
+const { sequelize } = require('./api/src/db');
+import { log } from 'console';
+import app from './api/src/app';
 
-app.use(router)
-
-app.listen(3001,()=>{
-    console.log("Server Listen to ", 3001);
-})
+sequelize
+  .sync({ alter: true, logging: false })
+  .then(() =>
+    app.listen(3001, function () {
+      log('Listening on Port: 3001');
+    })
+  )
+  .catch((error: Error) => log(error.message, error.name));

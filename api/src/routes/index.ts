@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import { getProductById, getProducts } from '../controllers/Products';
+import userRouter from './user';
+import productsRouter from '../controllers/Products';
 
-const router = Router();
+const router: Router = Router();
 
-router.get("/products", getProducts )
-router.get("/product/:id", getProductById)
-export{router}
+router.use('/user', userRouter);
+router.use('/products', productsRouter);
+
+export default router;
