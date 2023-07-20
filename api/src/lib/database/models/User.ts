@@ -41,6 +41,7 @@ export class User extends Model<UserAttributes> {
     allowNull: true,
   })
   picture!: string;
+
   @HasMany(() => Product)
   Products!: Product[];
 }
