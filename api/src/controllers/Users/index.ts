@@ -1,5 +1,5 @@
 import { log } from 'console';
-import { getAllUser, create } from '../../services/user';
+import { getAllUser, getOneUser, create } from '../../services/user';
 import { Request, Response } from 'express';
 import { UserAttributes } from "../../lib/database/models/User";
 
@@ -12,6 +12,15 @@ export const allUsers = async (req: Request, res:Response) => {
   }
 };
 
+export const oneUser = async (id: number) => {
+  try {
+      const response = await getOneUser(id)
+      return response
+  } catch (error) {
+    
+  }
+}
+
 export const postUser = async (req: Request, res: Response) => {
   const user: UserAttributes = req.body;
   try {
@@ -20,4 +29,4 @@ export const postUser = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).send(error);
   }
-};
+  }
