@@ -21,7 +21,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
 
 export const deletedProductById = async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id);
-  const idProduct: number = parseInt(req.body);
+  const idProduct: productId = req.body;
   try {
     const response = await deletedById(id, idProduct);
     res.status(200).send(response);
