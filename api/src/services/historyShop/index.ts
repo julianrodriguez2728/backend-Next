@@ -1,4 +1,3 @@
-import { Identifier, __String } from 'typescript';
 import { Product } from '../../lib/database/models/Product';
 import { User } from '../../lib/database/models/User';
 import axios from 'axios';
