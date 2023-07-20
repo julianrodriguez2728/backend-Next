@@ -2,11 +2,6 @@ import { User } from '../../lib/database/models/User';
 import { Product } from '../../lib/database/models/Product';
 import { UserAttributes } from '../../lib/database/models/User';
 
-interface dataLogin {
-  email: string;
-  password: string;
-}
-
 export const getAllUser = async () => {
   try {
     const allUsers = await User.findAll({
@@ -40,7 +35,7 @@ export const create = async (user: UserAttributes) => {
       (item) => user.name === item.name && user.email === item.email
     );
     if (results?.name === user.name) {
-      return 'This user already exists'; //* Si existe retornamos el mensaje
+      return results; //* Si existe retornamos el mensaje
     } else {
       User.create(user); //* y si no existe, creamos el usuario
       count += 1;
@@ -50,9 +45,4 @@ export const create = async (user: UserAttributes) => {
   } catch (error) {
     console.log(error);
   }
-};
-
-export const login = async (user: dataLogin) => {
-  try {
-  } catch (error) {}
 };
