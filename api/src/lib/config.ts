@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import { $GetType } from 'sequelize-typescript';
 dotenv.config();
 
 const config = {
