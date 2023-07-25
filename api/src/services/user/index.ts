@@ -34,13 +34,14 @@ export const create = async (user: UserAttributes) => {
       //* buscamos si el usuario que se intenta crear ya existe
       (item) => user.name === item.name && user.email === item.email
     );
-    if (results?.name === user.name) {
-      return results; //* Si existe retornamos el mensaje
-    } else {
+    if (results) {
+      return 'Log in'; //* Si existe retornamos el mensaje
+    }
+    if (user.name.length && user.email.length) {
       User.create(user); //* y si no existe, creamos el usuario
       count += 1;
     }
-
+    User.findAll();
     if (count > 0) return `User "${user.name}" created successfully`;
   } catch (error) {
     console.log(error);
