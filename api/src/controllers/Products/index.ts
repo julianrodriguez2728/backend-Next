@@ -6,6 +6,7 @@ import {
 } from '../../services/Product';
 export const getAllProducts = async (req: Request, res: Response) => {
   try {
+    createProductsDataBase();
     const response = await findAll();
     res.status(200).json(response);
   } catch (error) {
