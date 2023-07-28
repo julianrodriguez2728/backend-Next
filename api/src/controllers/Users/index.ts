@@ -1,25 +1,31 @@
-import { log } from 'console';
-import { getAllUser, getOneUser, create } from '../../services/user';
+import { getAllUser, getOneUser, create, productBought } from '../../services/user';
 import { Request, Response } from 'express';
-import { UserAttributes } from "../../lib/database/models/User";
+import { UserAttributes } from '../../lib/database/models/User';
+import { ProductModel } from '../../lib/database/models/Product';
 
-export const allUsers = async (req: Request, res:Response) => {
+interface dataLogin {
+  email: string;
+  password: string;
+}
+
+export const allUsers = async (req: Request, res: Response) => {
   try {
     const response = await getAllUser();
     res.status(200).send(response);
   } catch (error) {
-    res.status(400).send(error)
+    res.status(400).send(error);
   }
 };
 
-export const oneUser = async (id: number) => {
+export const oneUser = async (req: Request, res: Response) => {
+  const id: number = parseInt(req.params.id);
   try {
-      const response = await getOneUser(id)
-      return response
+    const response = await getOneUser(id);
+    res.status(200).send(response);
   } catch (error) {
-    
+    res.status(400).send(error);
   }
-}
+};
 
 export const postUser = async (req: Request, res: Response) => {
   const user: UserAttributes = req.body;
@@ -29,4 +35,16 @@ export const postUser = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).send(error);
   }
+};
+
+export const buyProduct = async(req: Request, res: Response) => {
+  const product: ProductModel = req.body
+
+  try {
+    const response = await productBought(product)
+    res.status(200).send(response)
+  } catch (error) {
+    res.status(400).send(error)
   }
+
+}
