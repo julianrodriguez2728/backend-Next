@@ -1,12 +1,11 @@
 //! MODELO DE USERS
 import { Column, Table, Model, HasMany } from 'sequelize-typescript';
-import { ProductHistory } from './ProductHistory';
+import { Product } from './Product';
 
-interface UserAttributes {
+export interface UserAttributes {
     id: number,
     name: string,
     email: string,
-    password: string,
     picture: string,
     createdAt: Date,
     updatedAt: Date,
@@ -47,7 +46,6 @@ export class User extends Model<UserAttributes> {
         allowNull: true,
     })
     picture!: string;
-
-    @HasMany(() => ProductHistory)
-    productHistory!: ProductHistory[]
+    @HasMany(() => Product)
+    Products!: Product[]
 }

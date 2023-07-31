@@ -1,7 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import router from './routes/index';
-const cookieParser = require('cookie-parser')
-const morgan = require('morgan')
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 
 const app: Application = express();
 app.use(express.urlencoded({ extended: true, limit: '50mb' })); //middleware
