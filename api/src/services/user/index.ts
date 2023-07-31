@@ -1,5 +1,5 @@
 import { User } from '../../lib/database/models/User';
-import { Product } from '../../lib/database/models/Product';
+import { Product, ProductModel } from '../../lib/database/models/Product';
 import { UserAttributes } from '../../lib/database/models/User';
 
 export const getAllUser = async () => {
@@ -47,3 +47,11 @@ export const create = async (user: UserAttributes) => {
     console.log(error);
   }
 };
+
+export const productBought = async (product: ProductModel) => {
+  try {
+
+  } catch (error) {
+    console.log(error)
+  }
+}

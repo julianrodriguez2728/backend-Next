@@ -1,11 +1,6 @@
 import { getAllUser, getOneUser, create } from '../../services/user';
 import { Request, Response } from 'express';
-import { UserAttributes } from '../../lib/database/models/User';
-
-interface dataLogin {
-  email: string;
-  password: string;
-}
+import { UserAttributes } from "../../lib/database/models/User";
 
 export const allUsers = async (req: Request, res: Response) => {
   try {
@@ -34,9 +29,4 @@ export const postUser = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).send(error);
   }
-};
-
-/* export const putUser = async(req: Request, res: Response) => {
-  const {userBody} = req.body;
-  
-} */
+}

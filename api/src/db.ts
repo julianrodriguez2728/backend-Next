@@ -1,4 +1,4 @@
-// const { Sequelize } = require('sequelize-typescript')
+// st { Sequelize } = require('sequelize-typescript')
 // const config = require('./lib/config')
 import config from "./lib/config";
 import { Sequelize } from "sequelize-typescript";
