@@ -1,3 +1,5 @@
+// st { Sequelize } = require('sequelize-typescript')
+// const config = require('./lib/config')
 import config from "./lib/config";
 import { Sequelize } from "sequelize-typescript";
 import { User } from "./lib/database/models/User";
@@ -10,4 +12,3 @@ export const sequelize = new Sequelize({
   username: config.dbUser,
   models: [User, Product],
 });
-
