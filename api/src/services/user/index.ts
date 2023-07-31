@@ -48,10 +48,10 @@ export const create = async (user: UserAttributes) => {
   }
 };
 
-export const productBought = async(product: ProductModel) => {
+export const productBought = async (product: ProductModel) => {
   try {
 
-  } catch(error) {
+  } catch (error) {
     console.log(error)
   }
 }

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Product } from '../../lib/database/models/Product';
 
 interface ProductModel {
-  image: string | string[];
+  image: string;
   price: number;
   name: string;
   description: string;
@@ -15,25 +15,19 @@ export const createProductsDataBase = async () => {
   try {
     const resp = await axios.get('https://apinext-98lb.vercel.app');
 
-    await Promise.all(
-      resp.data.map(async (item: ProductModel) => {
-        // Convert image to an array of strings if it's a single string
-        const imageArray = Array.isArray(item.image) ? item.image : [item.image];
-
-        await Product.findOrCreate({
-          where: {
-            name: item.name,
-            image: imageArray,
-            price: item.price,
-            description: item.description,
-            color: item.color,
-            brand: item.brand,
-            category: item.category,
-          },
-        });
-      })
-    );
-
+    await resp.data.forEach((item: ProductModel) => {
+      Product.findOrCreate({
+        where: {
+          name: item.name,
+          image: item.image,
+          price: item.price,
+          description: item.description,
+          color: item.color,
+          brand: item.brand,
+          category: item.category,
+        },
+      });
+    });
     const allProducts = await Product.findAll();
     return allProducts;
   } catch (error) {
@@ -41,11 +35,10 @@ export const createProductsDataBase = async () => {
   }
 };
 
-export const getProducts = async () => {
+export const findAll = async () => {
   try {
     const allProducts = await Product.findAll();
-    console.log(allProducts)
-      return allProducts;
+    return allProducts;
   } catch (error) {
     console.log(error);
   }

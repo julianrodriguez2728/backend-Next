@@ -1,12 +1,6 @@
-import { getAllUser, getOneUser, create, productBought } from '../../services/user';
+import { getAllUser, getOneUser, create } from '../../services/user';
 import { Request, Response } from 'express';
-import { UserAttributes } from '../../lib/database/models/User';
-import { ProductModel } from '../../lib/database/models/Product';
-
-interface dataLogin {
-  email: string;
-  password: string;
-}
+import { UserAttributes } from "../../lib/database/models/User";
 
 export const allUsers = async (req: Request, res: Response) => {
   try {
@@ -35,16 +29,4 @@ export const postUser = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(400).send(error);
   }
-};
-
-export const buyProduct = async(req: Request, res: Response) => {
-  const product: ProductModel = req.body
-
-  try {
-    const response = await productBought(product)
-    res.status(200).send(response)
-  } catch (error) {
-    res.status(400).send(error)
-  }
-
 }

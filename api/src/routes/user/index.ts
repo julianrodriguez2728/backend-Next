@@ -4,7 +4,7 @@ import { allUsers, oneUser, postUser } from '../../controllers/Users/index';
 const userRouter: Router = Router();
 
 userRouter.get('/all', allUsers);
-userRouter.get('/all/:id', oneUser);
-userRouter.post('/', postUser);
+userRouter.get('/:id', oneUser);
+/* userRouter.put('/productUser', putUser); */
 
 export default userRouter;

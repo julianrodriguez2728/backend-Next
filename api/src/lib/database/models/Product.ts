@@ -14,7 +14,7 @@ import {
 
 export interface ProductModel {
   id: number;
-  image: string[];
+  image: string;
   price: number;
   name: string;
   description: string;
@@ -55,9 +55,8 @@ export class Product extends Model<ProductModel> {
   @Column({
     allowNull: true,
     defaultValue: '',
-    type:DataType.ARRAY(DataType.STRING)
   })
-  image!: string[];
+  image!: string;
 
   @Column({
     allowNull: true,

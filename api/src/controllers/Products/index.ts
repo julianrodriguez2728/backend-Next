@@ -1,9 +1,35 @@
-import { Router } from 'express';
-import { getProductById, getProducts } from './controllers/productsController';
+import { Request, Response } from 'express';
+import {
+  createProductsDataBase,
+  findAll,
+  findById,
+} from '../../services/Product';
+export const getAllProducts = async (req: Request, res: Response) => {
+  try {
+    createProductsDataBase();
+    const response = await findAll();
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(404).json({ error });
+  }
+};
 
-const productsRouter = Router();
+export const getProductById = async (req: Request, res: Response) => {
+  const id: number = parseInt(req.params.id);
+  try {
+    const response = await findById(id);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(404).json({ error });
+  }
+};
 
-productsRouter.get('/', getProducts);
-productsRouter.get('/:id', getProductById);
+export const createProducts = async (req: Request, res: Response) => {
+  try {
+    const response = await createProductsDataBase();
 
-export default productsRouter;
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
