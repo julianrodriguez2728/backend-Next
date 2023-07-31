@@ -19,7 +19,7 @@ export const createProductsDataBase = async () => {
       Product.findOrCreate({
         where: {
           name: item.name,
-          image: item.image[0],
+          image: item.image,
           price: item.price,
           description: item.description,
           color: item.color,

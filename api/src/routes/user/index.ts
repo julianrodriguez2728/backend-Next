@@ -6,5 +6,6 @@ const userRouter: Router = Router();
 userRouter.post('/', postUser);
 userRouter.get('/all', allUsers);
 userRouter.get('/:id', oneUser);
+/* userRouter.put('/productUser', putUser); */
 
 export default userRouter;
