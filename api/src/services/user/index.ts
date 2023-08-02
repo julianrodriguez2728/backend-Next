@@ -5,9 +5,9 @@ import { UserAttributes } from '../../lib/database/models/User';
 export const getAllUser = async () => {
   try {
     const allUsers = await User.findAll({
-      include: [Product],
+      include: [Product], 
     });
-
+    
     return allUsers;
   } catch (error) {
     console.log('Something were wrong');
@@ -38,8 +38,10 @@ export const create = async (user: UserAttributes) => {
       return 'Log in'; //* Si existe retornamos el mensaje
     }
     if (user.name.length && user.email.length) {
-      User.create(user); //* y si no existe, creamos el usuario
+      User.create(user);
+       //* y si no existe, creamos el usuario
       count += 1;
+
     }
     User.findAll();
     if (count > 0) return `User "${user.name}" created successfully`;
@@ -48,10 +50,28 @@ export const create = async (user: UserAttributes) => {
   }
 };
 
-export const productBought = async (product: ProductModel) => {
-  try {
 
-  } catch (error) {
-    console.log(error)
-  }
+
+export const productBought = async (nombre:string, prod: any) => {
+  try {
+      const user = await User.findOne({ where: { name: nombre }, include: [Product]});
+      console.log(user?.Products, 'ANTES');
+      
+      if (user) {
+        // Verificar si 'Products' es un arreglo
+        user?.Products.push(prod)
+        // Guardar los cambios en la base de datos
+        const newProd = await Product.bulkCreate(prod)
+        await user?.$add("product", newProd)
+        await user?.save();
+
+        const updatedUser = await User.findByPk(user?.id, { include: [Product] });
+        console.log(updatedUser, "UPDATED USER");
+        console.log(user?.Products, "DESPUES");
+      }
+      
+    }catch(error){
+      console.log(error);
+
+    }
 }
