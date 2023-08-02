@@ -1,4 +1,4 @@
-import { getAllUser, getOneUser, create } from '../../services/user';
+import { getAllUser, getOneUser, create, productBought } from '../../services/user';
 import { Request, Response } from 'express';
 import { UserAttributes } from "../../lib/database/models/User";
 
@@ -11,21 +11,43 @@ export const allUsers = async (req: Request, res: Response) => {
   }
 };
 
-export const oneUser = async (req: Request, res: Response) => {
-  const id: number = parseInt(req.params.id);
-  try {
-    const response = await getOneUser(id);
-    res.status(200).send(response);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-};
+// export const oneUser = async (req: Request, res: Response) => {
+//   const id: number = parseInt(req.params.id);
+//   if (isNaN(id)) {
+//     res.status(400).send("Invalid user ID provided.");
+//     return;
+//   }
+
+//   try {
+//     const response = await getOneUser(id);
+//     if(!response){
+//       res.status(404).send("User not found.");
+//       return;
+//     }
+//     res.status(200).send(response);
+//   } catch (error) {
+//     res.status(400).send(error);
+//   }
+// };
 
 export const postUser = async (req: Request, res: Response) => {
   const user: UserAttributes = req.body;
   try {
     const response = await create(user);
     res.status(200).send(response);
+    console.log(response, "USUARIO CREADO");
+  } catch (error) {
+    res.status(400).send(error);
+  }
+}
+
+export const putUser = async(req:Request, res: Response)=>{
+  try {
+    const {nombre} = req.body;
+    const {prod} = req.body;
+    const response = await productBought(nombre, prod);
+    
+    res.status(200).send(response)
   } catch (error) {
     res.status(400).send(error);
   }
