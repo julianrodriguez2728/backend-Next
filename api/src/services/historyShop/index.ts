@@ -1,6 +1,5 @@
 import { Product } from '../../lib/database/models/Product';
 import { User } from '../../lib/database/models/User';
-import axios from 'axios';
 
 interface InterfaceProduct {
   id: number;
@@ -17,6 +16,10 @@ interface InterfaceProduct {
 
 interface productId {
   id: number;
+}
+
+interface postProductId {
+  id: number[];
 }
 
 export const findAll = async (id: number) => {
@@ -41,16 +44,20 @@ export const deletedById = async (id: number, productId: productId) => {
   return 'This product already exists';
 };
 
-export const productPost = async (id: number, productId: productId) => {
+export const productPost = async (id: number, productId: postProductId) => {
+  let ids: number[] = [];
+  productId.id.filter((item: any) => ids.push(item));
+
   const oneUser = await User.findByPk(id, { include: [Product] });
-  const oneProduct: InterfaceProduct | any = await Product.findByPk(
-    productId.id
-  );
-  oneUser?.Products.filter((product) => {
-    product.id === productId.id;
-    return 'This product already exists';
+  const oneProduct: InterfaceProduct | any = await Product.findAll({
+    where: { id: ids },
   });
+
+  console.log('PRODUCTS', oneProduct);
+  console.log('oneUser', oneUser);
+
   oneUser?.$add('Product', oneProduct);
+  console.log(oneUser?.id);
 
   return oneProduct;
 };

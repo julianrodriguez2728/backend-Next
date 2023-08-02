@@ -9,6 +9,10 @@ interface productId {
   id: number;
 }
 
+interface postProductId {
+  id: number[];
+}
+
 export const getAllProducts = async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id);
   try {
@@ -32,7 +36,7 @@ export const deletedProductById = async (req: Request, res: Response) => {
 
 export const postProduct = async (req: Request, res: Response) => {
   const id: number = parseInt(req.params.id);
-  const productId: productId = req.body;
+  const productId: postProductId = req.body;
   try {
     const response = await productPost(id, productId);
     res.status(200).send(response);

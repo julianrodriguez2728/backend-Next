@@ -9,7 +9,7 @@ const historyRouter = Router();
 
 historyRouter.get('/:id', getAllProducts);
 historyRouter.delete('/:id', deletedProductById);
-historyRouter.post('/create/:id', ); 
+historyRouter.post('/create/:id', postProduct);
 
 //? { [prodById: *[{}]*, cantidad: *number* ]}
 
