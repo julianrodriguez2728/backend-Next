@@ -9,6 +9,8 @@ const historyRouter = Router();
 
 historyRouter.get('/:id', getAllProducts);
 historyRouter.delete('/:id', deletedProductById);
-historyRouter.post('/create/:id', postProduct); //! Solo para cargar la BDD
+historyRouter.post('/create/:id', ); 
+
+//? { [prodById: *[{}]*, cantidad: *number* ]}
 
 export default historyRouter;

@@ -1,15 +1,5 @@
 import axios from 'axios';
-import { Product } from '../../lib/database/models/Product';
-
-interface ProductModel {
-  image: string;
-  price: number;
-  name: string;
-  description: string;
-  color: string;
-  brand: string;
-  category: string;
-}
+import { Product, ProductModel } from '../../lib/database/models/Product';
 
 export const createProductsDataBase = async () => {
   try {
@@ -20,6 +10,7 @@ export const createProductsDataBase = async () => {
         where: {
           name: item.name,
           image: item.image,
+          stock: item.stock,
           price: item.price,
           description: item.description,
           color: item.color,

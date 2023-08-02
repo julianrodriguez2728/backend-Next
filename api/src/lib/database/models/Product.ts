@@ -20,6 +20,7 @@ export interface ProductModel {
   description: string;
   color: string;
   brand: string;
+  stock: number;
   category: string;
   createdAt: Date;
   updatedAt: Date;
@@ -51,6 +52,11 @@ export class Product extends Model<ProductModel> {
     allowNull: false,
   })
   category!: string;
+
+  @Column({
+    allowNull: false,
+  })
+  stock!: number;
 
   @Column({
     allowNull: true,
