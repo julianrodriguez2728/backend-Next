@@ -4,7 +4,7 @@ import { log } from 'console';
 import app from './api/src/app';
 
 sequelize
-  .sync({ force: true, logging: false })
+  .sync({ alter: true, logging: false })
   .then(() =>
     app.listen(3001, function () {
       log('Listening on Port: 3001');
