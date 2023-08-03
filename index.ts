@@ -2,7 +2,6 @@ import express, { Application } from 'express';
 const { sequelize } = require('./api/src/db');
 import { log } from 'console';
 import app from './api/src/app';
-
 sequelize
   .sync({ alter: true, logging: false })
   .then(() =>
