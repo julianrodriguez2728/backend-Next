@@ -1,11 +1,14 @@
-import { getAllUser, getOneUser, create, productBought } from '../../services/user';
+import {
+  getAllUser,
+  create,
+  productBought,
+  getUserByEmail,
+} from '../../services/user';
 import { Request, Response } from 'express';
 import { UserAttributes } from '../../lib/database/models/User';
-import { ProductModel } from '../../lib/database/models/Product';
 
-interface dataLogin {
+interface Email {
   email: string;
-  password: string;
 }
 
 export const allUsers = async (req: Request, res: Response) => {
@@ -17,10 +20,30 @@ export const allUsers = async (req: Request, res: Response) => {
   }
 };
 
-export const oneUser = async (req: Request, res: Response) => {
-  const id: number = parseInt(req.params.id);
+// export const oneUser = async (req: Request, res: Response) => {
+//   const id: number = parseInt(req.params.id);
+//   if (isNaN(id)) {
+//     res.status(400).send("Invalid user ID provided.");
+//     return;
+//   }
+
+//   try {
+//     const response = await getOneUser(id);
+//     if(!response){
+//       res.status(404).send("User not found.");
+//       return;
+//     }
+//     res.status(200).send(response);
+//   } catch (error) {
+//     res.status(400).send(error);
+//   }
+// };
+
+export const getByEmail = async (req: Request, res: Response) => {
+  const email: Email = req.body;
+
   try {
-    const response = await getOneUser(id);
+    const response = await getUserByEmail(email);
     res.status(200).send(response);
   } catch (error) {
     res.status(400).send(error);
@@ -32,19 +55,20 @@ export const postUser = async (req: Request, res: Response) => {
   try {
     const response = await create(user);
     res.status(200).send(response);
+    console.log(response, 'USUARIO CREADO');
   } catch (error) {
     res.status(400).send(error);
   }
 };
 
-export const buyProduct = async(req: Request, res: Response) => {
-  const product: ProductModel = req.body
-
+export const putUser = async (req: Request, res: Response) => {
   try {
-    const response = await productBought(product)
-    res.status(200).send(response)
-  } catch (error) {
-    res.status(400).send(error)
-  }
+    const { nombre } = req.body;
+    const { prod } = req.body;
+    const response = await productBought(nombre, prod);
 
-}
+    res.status(200).send(response);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};

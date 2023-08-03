@@ -14,12 +14,13 @@ import {
 
 export interface ProductModel {
   id: number;
-  image: string[];
+  image: string;
   price: number;
   name: string;
   description: string;
   color: string;
   brand: string;
+  stock: number;
   category: string;
   createdAt: Date;
   updatedAt: Date;
@@ -53,11 +54,15 @@ export class Product extends Model<ProductModel> {
   category!: string;
 
   @Column({
+    allowNull: false,
+  })
+  stock!: number;
+
+  @Column({
     allowNull: true,
     defaultValue: '',
-    type:DataType.ARRAY(DataType.STRING)
   })
-  image!: string[];
+  image!: string;
 
   @Column({
     allowNull: true,
